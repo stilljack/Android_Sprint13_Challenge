@@ -7,8 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.ihatefridays.R
+import retrofit2.Retrofit
+import javax.inject.Inject
 
 class MainFragment : Fragment() {
+
+   @Inject
+    lateinit var retrofit: Retrofit
 
     companion object {
         fun newInstance() = MainFragment()
@@ -19,6 +24,7 @@ class MainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.main_fragment, container, false)
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
