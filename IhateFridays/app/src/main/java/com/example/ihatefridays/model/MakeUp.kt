@@ -1,5 +1,7 @@
 package com.example.ihatefridays.model
 
+import com.google.gson.annotations.SerializedName
+
 data class MakeUp(
     val api_featured_image: String,
     val brand: String,
@@ -8,7 +10,8 @@ data class MakeUp(
     val currency: Any,
     val description: String,
     val id: Int,
-    val image_link: String,
+    @SerializedName("image_link")
+        val image_link: String,
     val name: String,
     val price: String,
     val price_sign: Any,

@@ -16,6 +16,8 @@ interface MakeupApiInterface {
     fun searchMakeup(@Query("brand")query: String): Single<List<MakeUp>>
 }
 
+
+//this is never used and remains merely for reference
 class RetrofitInstance {
 
     companion object {

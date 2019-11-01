@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ihatefridays.R
 import com.example.ihatefridays.di.App
 import com.example.ihatefridays.di.DaggerAppComponent
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.main_fragment.*
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), MakeupAdapter.Interaction {
     val compositeDisposable = CompositeDisposable()
    @Inject
     lateinit var retrofit: Retrofit
@@ -30,10 +31,12 @@ class MainFragment : Fragment() {
     lateinit var makeupAPIInterface:MakeupApiInterface
 
 
+
     companion object {
         fun newInstance() = MainFragment()
     }
-
+    lateinit var adapter: MakeupAdapter
+    lateinit var linearLayoutManager : LinearLayoutManager
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -46,14 +49,18 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         (activity!!.application as App).appComponent.build().inject(this)
-        makeupAPIInterface
-        retrofit
+        linearLayoutManager = LinearLayoutManager(this.context)
+        adapter= MakeupAdapter(this@MainFragment)
+        rv_main.adapter=adapter
+        rv_main.layoutManager=linearLayoutManager
+
+
         val newDisposable = makeupAPIInterface.searchMakeup("maybelline").subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .retry(10)
             .subscribeBy(
                 onSuccess = {
-                    message.text = it[0].name.toString()
+                    adapter.submitList(it)
                     Log.i("success",it.toString())},
                 onError =  { it.printStackTrace() }
             )
@@ -66,5 +73,9 @@ class MainFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.dispose()
+    }
+
+    override fun onItemSelected(position: Int, item: MakeUp) {
+        Log.i("fragmentlistener","pos=$position item=${item.name}")
     }
 }
