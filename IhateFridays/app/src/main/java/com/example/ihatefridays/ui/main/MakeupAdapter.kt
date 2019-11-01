@@ -72,6 +72,7 @@ class MakeupAdapter(private val interaction: Interaction? = null) :
             itemView.tv_rating.text = item.rating.toString()
             Glide.with(itemView.context)
                 .load(item.image_link)
+                .centerCrop()
                 .into(itemView.iv_image)
 
         }
