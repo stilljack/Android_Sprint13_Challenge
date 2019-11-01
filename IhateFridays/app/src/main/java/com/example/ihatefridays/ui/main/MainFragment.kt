@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ihatefridays.R
 import com.example.ihatefridays.di.App
@@ -53,6 +54,8 @@ class MainFragment : Fragment(), MakeupAdapter.Interaction {
         adapter= MakeupAdapter(this@MainFragment)
         rv_main.adapter=adapter
         rv_main.layoutManager=linearLayoutManager
+
+        activity!!.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         btn_main.setOnClickListener {
             if (et_main.text !=null) {
