@@ -16,7 +16,7 @@ data class MakeUp(
     val product_colors: List<ProductColor>,
     val product_link: String,
     val product_type: String,
-    val rating: Int,
+    val rating: Double,
     val tag_list: List<Any>,
     val updated_at: String,
     val website_link: String

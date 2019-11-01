@@ -52,9 +52,9 @@ class MainFragment : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .retry(10)
             .subscribeBy(
-                onSuccess = { list ->
-                    message.text = list[0].name.toString()
-                    Log.i("success",list.toString())},
+                onSuccess = {
+                    message.text = it[0].name.toString()
+                    Log.i("success",it.toString())},
                 onError =  { it.printStackTrace() }
             )
 
