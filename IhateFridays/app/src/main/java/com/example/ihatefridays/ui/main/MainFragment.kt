@@ -48,7 +48,7 @@ class MainFragment : Fragment() {
         (activity!!.application as App).appComponent.build().inject(this)
         makeupAPIInterface
         retrofit
-        val newDisposable = makeupAPIInterface.searchMakeup("maybeline").subscribeOn(Schedulers.io())
+        val newDisposable = makeupAPIInterface.searchMakeup("maybelline").subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .retry(10)
             .subscribeBy(

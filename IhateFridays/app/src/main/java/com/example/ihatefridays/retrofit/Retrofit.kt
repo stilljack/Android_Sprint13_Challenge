@@ -12,8 +12,8 @@ import retrofit2.http.Query
 
 
 interface MakeupApiInterface {
-    @GET("products.json")
-    fun searchMakeup(@Query("query")query: String): Single<List<MakeUp>>
+    @GET ("products.json")
+    fun searchMakeup(@Query("brand")query: String): Single<List<MakeUp>>
 }
 
 class RetrofitInstance {

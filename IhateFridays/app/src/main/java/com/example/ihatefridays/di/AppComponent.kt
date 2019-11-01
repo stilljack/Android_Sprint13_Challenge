@@ -36,7 +36,8 @@ interface AppComponent {
 
 @Module
 object AppModule {
-    private val  BASEURL = "http://makeup-api.herokuapp.com/api/v1/"
+  private val  BASEURL = "https://makeup-api.herokuapp.com/api/v1/"
+// private val  BASEURL =   "https://api.exchangerate-api.com/v4/latest/"
     val logging =  HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
 
     val client = OkHttpClient.Builder().addInterceptor(logging).build()
